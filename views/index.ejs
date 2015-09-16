@@ -1,0 +1,174 @@
+<html>
+<head>
+        <title><%= msg %></title>
+        <script type="text/javascript" src="http://openapi.map.naver.com/openapi/naverMap.naver?ver=2.0&key=6709685be310872f4daaf2ba78d9a4b6"></script>
+        <style type="text/css">
+            @import url(http://fonts.googleapis.com/earlyaccess/nanumpenscript.css);
+            @import url(http://fonts.googleapis.com/earlyaccess/kopubbatang.css);
+
+            .date{ font-family:'Nanum Pen Script', cursive;}
+
+            body {
+                margin :0;
+                padding :0;
+            }
+
+        	table{ font-family:'Nanum Pen Script', cursive;
+                   text-align:center; 
+                   font-size:3em;
+                   table-layout:fixed;
+                   font-weight:bold; }
+            .day{ color:#000000; }
+            .sun{ color:#ff0000; }
+            .sat{ color:#0000ff; }
+            .hol{ color:#ff0000; }
+        	#label{ font-weight:bold; }
+
+            p { font-size:2em;
+                padding-left:2em; 
+                font-family: 'KoPub Batang', serif;
+            }
+
+            #circle{
+                background-color: rgba(255,0,0,0.5);
+                border:3px ;
+                width:60;
+                height:60;
+                -webkit-border-radius:30px;
+                -moz-border-radius:30px;
+                display: block;
+                margin-left:auto;
+                margin-right:auto;
+            }
+
+        <link rel="image_src" href="http://54.64.248.26:3000/img2" />
+           
+        </style>
+</head>
+
+<body>
+	<img src="/img1" width="100%" ><br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="date" style="font-size:7em ; text-align:center">10월 9일 금요일<br>
+                                                   오전 11시<br>
+                                                    D 
+                                                    <script> var now=new Date();
+                                                             var then=new Date("Oct 9,2015");
+                                                             var gap=now.getTime()-then.getTime();
+                                                             gap=Math.floor(gap/(1000*60*60*24));
+                                                             document.write(gap)</script>
+                                                    <br>
+    </div>
+    <br>
+    <br>
+    <br>
+    <table border="0" cellspacing="0" cellpadding="0" style="width:100%; height:auto;">
+	<tr>
+	    <td id="label" class="sun">일</td>
+	    <td id="label" class="day">월</td>
+        <td id="label" class="day">화</td>
+        <td id="label" class="day">수</td>
+        <td id="label" class="day">목</td>
+        <td id="label" class="day">금</td>
+        <td id="label" class="sat">토</td>
+	</tr>
+    <tr>
+            <td class="sun">20</td>
+            <td class="day">21</td>
+            <td class="day">22</td>
+            <td class="day">23</td>
+            <td class="day">24</td>
+            <td class="day">25</td>
+            <td class="hol">26</td>
+        </tr>
+        <tr>
+            <td class="sun">27</td>
+            <td class="hol">28</td>
+            <td class="hol">29</td>
+            <td class="day">30</td>
+            <td class="day">10/1</td>
+            <td class="hol">2</td>
+            <td class="hol">3</td>
+        </tr>
+        <tr>
+            <td class="sun">4</td>
+            <td class="day">5</td>
+            <td class="day">6</td>
+            <td class="day">7</td>
+            <td class="day">8</td>
+            <td class="day"><div id="circle">9</div></td>
+            <td class="sat">10</td>
+        </tr>
+	</table>
+	<br><br><br>
+	<div id = "naverMap" style="text-align:center border:1px solid #000; width=800px;height=600px; margin:auto;"></div>
+    	<script type="text/javascript">
+                        var oCenterPoint = new nhn.api.map.LatLng(37.5614521,126.8531596);
+                        nhn.api.map.setDefaultPoint('LatLng');
+                        oMap = new nhn.api.map.Map('naverMap' ,{
+                                                point : oCenterPoint,
+                                                zoom : 12,
+                                                enableWheelZoom : true,
+                                                enableDragPan : true,
+                                                enableDblClickZoom : false,
+                                                mapMode : 0,
+                                                activateTrafficMap : false,
+                                                activateBicycleMap : false,
+                                                minMaxLevel : [ 1, 14 ],
+                                                size : new nhn.api.map.Size(800, 600)
+                                        });
+
+                        var mapZoom = new nhn.api.map.ZoomControl(); // - 줌 컨트롤 선언
+                        mapZoom.setPosition({left:20, bottom:20}); // - 줌 컨트롤 위치 지정
+                        oMap.addControl(mapZoom);
+
+			var oSize=new nhn.api.map.Size(28, 37);
+                        var oOffset = new nhn.api.map.Size(14, 37);
+                        var oIcon = new nhn.api.map.Icon('http://static.naver.com/maps2/icons/pin_spot2.png', oSize, oOffset);
+                        
+ 
+			var oMarker = new nhn.api.map.Marker(oIcon, { title : '더채플앳웨스트' });
+                        oMarker.setPoint(oCenterPoint);
+                        oMap.addOverlay(oMarker);
+
+			var oLabel = new nhn.api.map.MarkerLabel();
+			oMap.addOverlay(oLabel);
+			oLabel.setVisible(true,oMarker);
+
+                  //      var mapInfoTestWindow = new nhn.api.map.InfoWindow(); // - info window 생성
+                  //      mapInfoTestWindow.setVisible(true); // - infowindow 표시 여부 지정.
+                  //      oMap.addOverlay(mapInfoTestWindow);     // - 지도에 추가.    
+
+
+	</script>
+    <br>
+    <br>
+    <p>더 채플앳웨스트<br>TEL 02-2692-1121<br>서울시 강서구 등촌동 73-1<br>
+    <br>
+    버스<br>
+    간선 : 652,672 / 지선 : 6632<br>/ 공항 : 6018 / 광역: 7700<br>
+    <br>
+    지하철<br>
+    9호선, 가양역 9번출구 나와 직진 <br>10m 도보 후 좌측 <br>(구)아름다운 아울렛 7F<br>
+    <br>
+    자가용<br>
+    올림픽대로 진입 시 올림픽대로<br> -> 강서구천 방면 진입<br> -> 가양역사거리 우회전 후 150m전방 위치<br>(건너편 위치: 150m앞 유턴 후 주차장 진입)<br>
+	<br>
+    </p> 
+    <br>
+    <br>
+    <img src="/img5" width="100%" ><br>
+    <br>
+    <img src="/img2" width="100%" ><br>
+    <br>
+    <img src="/img3" width="100%" ><br>
+    <br>
+    <img src="/img4" width="100%" ><br>
+    <br>
+    <img src="/img6" width="100%" ><br>       
+</body>
+</html>
